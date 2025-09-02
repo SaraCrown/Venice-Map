@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2487.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Venetian Trade Routes Map&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="utf-8" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Leaflet CSS --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#map { height: 100vh; width: 100%; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.intro-popup {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Arial', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1">&lt;div id="map"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- Leaflet JS --&gt;</p>
+<p class="p1">&lt;script src="https://unpkg.com/leaflet/dist/leaflet.js"&gt;&lt;/script&gt;</p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Initialize the map centered over the Eastern Mediterranean</p>
+<p class="p1"><span class="Apple-converted-space">    </span>var map = L.map('map').setView([41.0, 20.0], 4);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Base map layer</p>
+<p class="p1"><span class="Apple-converted-space">    </span>L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>attribution: '&amp;copy; OpenStreetMap contributors'</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}).addTo(map);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Intro popup</p>
+<p class="p1"><span class="Apple-converted-space">    </span>setTimeout(function() {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>L.popup({maxWidth: 300})</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.setLatLng([41, 20])</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.setContent("&lt;div class='intro-popup'&gt;&lt;strong&gt;Welcome to Venice's world!&lt;/strong&gt;&lt;br&gt;You are about to explore the Venetian Republic, its trade routes, and the journey of St. Mark's relics. Toggle layers and click the pins to learn more.&lt;/div&gt;")</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.openOn(map);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}, 500);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Layer groups</p>
+<p class="p1"><span class="Apple-converted-space">    </span>var venetianLayer = L.layerGroup();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>var byzantineLayer = L.layerGroup();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>var tradeRoutesLayer = L.layerGroup();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Venetian Republic Polygon</p>
+<p class="p1"><span class="Apple-converted-space">    </span>var venetianPolygon = L.polygon([</p>
+<p class="p1"><span class="Apple-converted-space">        </span>[46, 12], [45, 13], [43, 14], [41, 13], [42, 12]</p>
+<p class="p1"><span class="Apple-converted-space">    </span>], {color: 'blue', fillOpacity: 0.2}).bindPopup("Venetian Republic at its height");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>venetianLayer.addLayer(venetianPolygon);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Byzantine Empire Polygon</p>
+<p class="p1"><span class="Apple-converted-space">    </span>var byzantinePolygon = L.polygon([</p>
+<p class="p1"><span class="Apple-converted-space">        </span>[43, 26], [42, 28], [41, 29], [40, 27], [41, 26]</p>
+<p class="p1"><span class="Apple-converted-space">    </span>], {color: 'purple', fillOpacity: 0.2}).bindPopup("Byzantine Empire around 1200 AD");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>byzantineLayer.addLayer(byzantinePolygon);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Pins</p>
+<p class="p1"><span class="Apple-converted-space">    </span>var venice = L.marker([45.4408, 12.3155]).bindPopup("&lt;b&gt;Venice&lt;/b&gt;&lt;br&gt;The Queen of the Adriatic, hub of merchants and faith. Treasures and relics flowed to St. Mark’s.");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>var constantinople = L.marker([41.0082, 28.9784]).bindPopup("&lt;b&gt;Constantinople&lt;/b&gt;&lt;br&gt;The gateway to the East. After 1204, many mosaics, relics, and the Horses of St. Mark arrived here.");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>var crete = L.marker([35.3387, 25.1442]).bindPopup("&lt;b&gt;Crete&lt;/b&gt;&lt;br&gt;Venice’s prized colony — source of food, wine, and culture.");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>var alexandria = L.marker([31.2001, 29.9187]).bindPopup("&lt;b&gt;Alexandria&lt;/b&gt;&lt;br&gt;Where St. Mark's relics began their journey to Venice.");</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>venetianLayer.addLayer(venice);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>venetianLayer.addLayer(constantinople);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>venetianLayer.addLayer(crete);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>venetianLayer.addLayer(alexandria);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Trade routes</p>
+<p class="p1"><span class="Apple-converted-space">    </span>var route1 = L.polyline([[45.4408, 12.3155],[41.0082, 28.9784]], {color:'orange'}).bindPopup("Trade route: Venice → Constantinople");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>var route2 = L.polyline([[45.4408, 12.3155],[35.3387, 25.1442]], {color:'orange'}).bindPopup("Trade route: Venice → Crete");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>var route3 = L.polyline([[35.3387, 25.1442],[31.2001, 29.9187]], {color:'orange'}).bindPopup("Trade route: Crete → Alexandria");</p>
+<p class="p1"><span class="Apple-converted-space">    </span>tradeRoutesLayer.addLayer(route1);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>tradeRoutesLayer.addLayer(route2);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>tradeRoutesLayer.addLayer(route3);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Add default layers</p>
+<p class="p1"><span class="Apple-converted-space">    </span>venetianLayer.addTo(map);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>byzantineLayer.addTo(map);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>tradeRoutesLayer.addTo(map);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Layer control</p>
+<p class="p1"><span class="Apple-converted-space">    </span>L.control.layers(null, {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"Venetian Republic": venetianLayer,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"Byzantine Empire": byzantineLayer,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>"Trade Routes": tradeRoutesLayer</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}).addTo(map);</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
